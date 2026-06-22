@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FIX: Yahan href ki jagah SRC kar diya hai taake 3D model engine chale -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <style>
@@ -43,26 +42,26 @@
         }
 
         header.brand {
-            padding: 30px 16px 24px;
+            padding: 35px 16px 28px;
             text-align: center;
             background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 60%, #FFB666 100%);
             border-radius: 0 0 32px 32px;
             position: relative;
-            box-shadow: 0 8px 24px rgba(255,128,0,0.15);
+            box-shadow: 0 8px 24px rgba(255,128,0,0.2);
         }
 
         header.brand h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: var(--white);
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
         header.brand p {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.9);
-            margin-top: 4px;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.95);
+            margin-top: 6px;
             font-weight: 500;
         }
 
@@ -78,10 +77,10 @@
 
         .tab-btn {
             display: inline-block;
-            padding: 10px 22px;
+            padding: 10px 24px;
             margin-right: 10px;
             background-color: var(--gray);
-            color: #666;
+            color: #555;
             border: none;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -93,7 +92,7 @@
         .tab-btn.active {
             background-color: var(--black);
             color: var(--white);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .menu-container {
@@ -109,11 +108,11 @@
         }
 
         .category-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin: 15px 0 20px;
             position: relative;
-            padding-left: 12px;
+            padding-left: 14px;
         }
         .category-title::before {
             content: '';
@@ -129,17 +128,17 @@
         .item-card {
             background-color: var(--white);
             border-radius: 20px;
-            padding: 12px;
+            padding: 14px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .item-img-container {
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             border-radius: 16px;
             overflow: hidden;
             background-color: var(--gray);
@@ -147,8 +146,8 @@
         }
 
         .item-img-container img {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -161,7 +160,7 @@
         }
 
         .item-name {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--black);
             line-height: 1.3;
@@ -172,9 +171,9 @@
             background-color: var(--orange);
             color: var(--white);
             border: none;
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: 12px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
@@ -185,7 +184,6 @@
             box-shadow: 0 4px 10px rgba(255,128,0,0.25);
         }
 
-        /* AR MODAL VIEWER */
         .ar-overlay {
             display: none;
             position: fixed;
@@ -193,7 +191,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -204,13 +202,13 @@
         }
 
         model-viewer {
-            width: 90%;
-            height: 70%;
+            width: 95%;
+            height: 75%;
         }
 
         .close-ar-btn {
             position: absolute;
-            top: 30px;
+            top: 40px;
             right: 20px;
             background-color: var(--white);
             color: var(--black);
@@ -218,13 +216,14 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -235,91 +234,136 @@
         <p>Experience Our Menu in 3D Augmented Reality</p>
     </header>
 
-    <!-- TABS -->
     <div class="tabs-container">
-        <button id="btn-burger" class="tab-btn active" onclick="switchCategory('burger')">Burgers</button>
-        <button id="btn-pizza" class="tab-btn" onclick="switchCategory('pizza')">Pizza</button>
-        <button id="btn-hot-selling" class="tab-btn" onclick="switchCategory('hot-selling')">Hot Selling</button>
+        <button class="tab-btn active" onclick="switchCategory('burger', this)">Burgers</button>
+        <button class="tab-btn" onclick="switchCategory('pizza', this)">Pizza</button>
+        <button class="tab-btn" onclick="switchCategory('drink', this)">Drinks</button>
+        <button class="tab-btn" onclick="switchCategory('hot-selling', this)">Hot Selling</button>
+        <button class="tab-btn" onclick="switchCategory('soup', this)">Soup</button>
     </div>
 
     <div class="menu-container">
 
-        <!-- BURGERS SECTION -->
         <div id="burger" class="category-section active">
             <h2 class="category-title">Delicious Burgers</h2>
             <div class="item-card">
                 <div class="item-img-container"><img src="Burger/Burger.jpg" alt="Burger"></div>
                 <div class="item-details">
                     <div class="item-name">Classic Burger</div>
-                    <!-- Agar iska 3D model nahi hai to khali chora hai -->
-                    <button class="ar-btn" onclick="openAR('')">👁️ View in 3D / AR</button>
+                    <button class="ar-btn" onclick="openAR('Burger/Burger.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Burger/Cheese Burger.jpg" alt="Cheese Burger"></div>
+                <div class="item-details">
+                    <div class="item-name">Cheese Burger</div>
+                    <button class="ar-btn" onclick="openAR('Burger/Cheese Burger.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Burger/Zinger Burger.jpeg" alt="Zinger Burger"></div>
+                <div class="item-details">
+                    <div class="item-name">Zinger Burger</div>
+                    <button class="ar-btn" onclick="openAR('Burger/Zinger Burger.glb')">👁️ View in 3D / AR</button>
                 </div>
             </div>
         </div>
 
-        <!-- PIZZA SECTION -->
         <div id="pizza" class="category-section">
             <h2 class="category-title">Yummy Pizzas</h2>
             <div class="item-card">
                 <div class="item-img-container"><img src="Pizza/Fajita pizza.jpg" alt="Fajita Pizza"></div>
                 <div class="item-details">
                     <div class="item-name">Fajita Pizza</div>
-                    <!-- FIX: Video ke mutabiq sahi path lagaya hai -->
                     <button class="ar-btn" onclick="openAR('Pizza/Fajita pizza.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Pizza/Chicken Tikka Pizza .jpg" alt="Chicken Tikka Pizza"></div>
+                <div class="item-details">
+                    <div class="item-name">Chicken Tikka Pizza</div>
+                    <button class="ar-btn" onclick="openAR('Pizza/Chicken Tikka Pizza .glb')">👁️ View in 3D / AR</button>
                 </div>
             </div>
         </div>
 
-        <!-- HOT SELLING SECTION -->
+        <div id="drink" class="category-section">
+            <h2 class="category-title">Refreshing Drinks</h2>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Drink/Lassi.jpg" alt="Lassi"></div>
+                <div class="item-details">
+                    <div class="item-name">Lassi</div>
+                    <button class="ar-btn" onclick="openAR('Drink/Lassi.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Drink/Mint margrita.jpg" alt="Mint Margrita"></div>
+                <div class="item-details">
+                    <div class="item-name">Mint Margrita</div>
+                    <button class="ar-btn" onclick="openAR('Drink/Mint margrita.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+        </div>
+
         <div id="hot-selling" class="category-section">
             <h2 class="category-title">Hot Selling Items</h2>
             <div class="item-card">
-                <div class="item-img-container"><img src="Hot selling/Chicken_Paprika.glb" style="display:none;" onerror="this.src='Hot selling/Chicken_Paprika.jpg'"> <img src="Hot selling/Chicken_Paprika.jpg" alt="Chicken Paprika"></div>
+                <div class="item-img-container"><img src="Hot selling/Chicken_Paprika.jpg" alt="Chicken Paprika"></div>
                 <div class="item-details">
                     <div class="item-name">Chicken Paprika</div>
                     <button class="ar-btn" onclick="openAR('Hot selling/Chicken_Paprika.glb')">👁️ View in 3D / AR</button>
                 </div>
             </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Hot selling/steam rice with rosted chicken.jpg" alt="Steam Rice"></div>
+                <div class="item-details">
+                    <div class="item-name">Steam Rice with Roasted Chicken</div>
+                    <button class="ar-btn" onclick="openAR('Hot selling/steam rice with rosted chicken.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="soup" class="category-section">
+            <h2 class="category-title">Warm Soups</h2>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Soup/Thai soup.jpeg" alt="Thai Soup"></div>
+                <div class="item-details">
+                    <div class="item-name">Thai Soup</div>
+                    <button class="ar-btn" onclick="openAR('Soup/Thai soup.glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img-container"><img src="Soup/Chicken corn soup .jpeg" alt="Chicken Corn Soup"></div>
+                <div class="item-details">
+                    <div class="item-name">Chicken Corn Soup</div>
+                    <button class="ar-btn" onclick="openAR('Soup/Chicken corn soup .glb')">👁️ View in 3D / AR</button>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <!-- AR OVERLAY BOX -->
     <div class="ar-overlay" id="arOverlay">
         <button class="close-ar-btn" onclick="closeAR()">✕</button>
-        <div id="viewerContainer" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;">
-            <!-- Model viewer dynamic load hoga -->
-        </div>
+        <div id="viewerContainer" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center;"></div>
     </div>
 
     <script>
-        function switchCategory(categoryId) {
-            // Saari sections ko chupao
+        function switchCategory(categoryId, element) {
             document.querySelectorAll('.category-section').forEach(section => {
                 section.classList.remove('active');
             });
-            // Saare tab buttons se active class hatao
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Sahi section aur button ko active karo
             document.getElementById(categoryId).classList.add('active');
-            if(categoryId === 'burger') document.getElementById('btn-burger').classList.add('active');
-            if(categoryId === 'pizza') document.getElementById('btn-pizza').classList.add('active');
-            if(categoryId === 'hot-selling') document.getElementById('btn-hot-selling').classList.add('active');
+            element.classList.add('active');
         }
 
         function openAR(modelSrc) {
-            if(!modelSrc) {
-                alert("This item's 3D model is coming soon!");
-                return;
-            }
-            
             const overlay = document.getElementById('arOverlay');
             const container = document.getElementById('viewerContainer');
             
-            // Dynamic model-viewer create karna taake page load par crash na ho
             container.innerHTML = `
                 <model-viewer 
                     src="${modelSrc}" 
@@ -335,7 +379,7 @@
 
         function closeAR() {
             document.getElementById('arOverlay').classList.remove('active');
-            document.getElementById('viewerContainer').innerHTML = ''; // Memory clear karne ke liye
+            document.getElementById('viewerContainer').innerHTML = '';
         }
     </script>
 </body>
